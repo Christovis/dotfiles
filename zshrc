@@ -2,17 +2,11 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/chrbecker/.oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh/
 
-# To run python code in P5Anomaly
-export MKL_THREADING_LAYER=GNU
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-#ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "candy-kingdom")
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -56,18 +50,12 @@ export MKL_THREADING_LAYER=GNU
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+plugins=(git)
 
+ZSH_THEME="agnoster"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussel"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -95,20 +83,20 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+	    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#export PATH="$PATH:/home/arnau/anaconda3/bin"
+#export PYTHONPATH="$PYTHONPATH:/path/to/anaconda3/lib/python3.6/site-packages"
+#
 # --- Aliases ---
-alias termitetheme='~/.config/termite/schemeChange.sh'
+alias termitetheme='~/dotfiles/termite/schemeChange.sh'
 alias cosma5='ssh -Y dc-beck3@login.cosma.dur.ac.uk'
 alias cosma6='ssh -Y dc-beck3@login6.cosma.dur.ac.uk'
 alias cosmajupyter='ssh -L 8443:172.17.100.24:8000 -N cosma-c'
 alias notebook-server='jupyter-notebook --no-browser --port=8988'
 
-# Powerline
-if [[ -r /home/chrbecker/miniconda2/lib/python2.7/site-packages/powerline/bindings/zsh/agnoster-fcamblor.zsh ]]; then
-	    source /home/chrbecker/miniconda2/lib/python2.7/site-packages/powerline/bindings/zsh/agnoster-fcamblor.zsh
-fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# added by Miniconda2 installer
-export PATH="/home/chrbecker/miniconda2/bin:$PATH"

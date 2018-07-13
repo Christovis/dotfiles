@@ -229,16 +229,18 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh  # toggle touchpad
 
 
 # Applications
-bindsym $mod+p exec KeeWeb /home/chrbecker/Documents/Keys/pws_encryption_3.kdbx
+bindsym $mod+p exec KeeWeb /home/christoph/Documents/Keys/pws_encryption_3.kdbx
 bindsym $mod+w exec firefox
-bindsym $mod+m exec Telegram
+bindsym $mod+m exec telegram-desktop
 bindsym $mod+shift+n exec nautilus 
 # bindsym $mod+c exec conky
 # bindsym $mod+shift+c exec "killall conky"
 
 # Start-Up Manager
 exec --no-startup-id compton -f
-exec_always feh --bg-scale /home/chrbecker/Pictures/wallpaper1.png
+# Use webm/mp4 for xwinwrap (not gif!
+#exec_always xwinwrap -ov -ni -fs -- mpv -vo x11 -wid WID --keepaspect=no --loop /home/christoph/Pictures/sci_fi.mp4
+exec_always feh --bg-scale /home/christoph/Pictures/wallpaper1.png
 exec redshift-gtk
 exec --no-startup-id nm-applet
 #######################################################################

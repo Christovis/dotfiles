@@ -31,7 +31,7 @@
 #
 # Location must be ABSOLUTE PATH
 
-config_loc="/home/chrbecker/.config/termite/"
+config_loc="/home/christoph/.config/termite/"
 config_name="config"
 
 # Scheme Location: Uncomment one of the two lines below

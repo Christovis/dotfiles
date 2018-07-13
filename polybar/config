@@ -99,7 +99,7 @@ label-urgent-padding = 4
 [module/cpu]
 type = internal/cpu
 interval = 1
-format = " <ramp-coreload> <label> "
+format = <label> <ramp-coreload>
 label = %{F#e8d174}CPU %percentage%%
 ramp-coreload-0 = ▁
 ramp-coreload-0-font = 3
@@ -263,9 +263,9 @@ ramp-1 = 🌔
 ramp-1-foreground = ${colours.maia}
 ramp-2 = 🌓
 ramp-2-foreground = ${colours.icon}
-ramp-3 = 🌒
+ramp-3 = 
 ramp-3-foreground = ${colours.text}
-ramp-4 = 🌑
+ramp-4 = 
 ramp-4-foreground = ${colours.text}
 
 [module/xwindow]
@@ -297,6 +297,8 @@ separator = %{F#33}|
 font-0 = System San Francisco Display:size=10;2
 font-1 = FontAwesome:size=14;3
 font-2 = MaterialIcons:size=14;4
+font-3 = URW Gothic:size=11;2
+font-4 = Raleway VF Beta:size=11:weight=Regular;1
 ;http://fontawesome.io/cheatsheet/
 ;https://shanfan.github.io/material-icons-cheatsheet/
 modules-center = lock logout suspend reboot poweroff closepowermenubar
