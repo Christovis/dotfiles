@@ -13,34 +13,41 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 nmap <F8> :TagbarToggle<CR> 
 call plug#begin('~/.vim/plugged')
-Plug 'lervag/vimtex'
+Plug 'altercation/vim-colors-solarized'
+"Plug 'brennier/quicktex'
 "Plug 'chriskempson/base16-vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdtree'
-"Plug 'altercation/vim-colors-solarized'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'vim-airline/vim-airline'
-Plug 'brennier/quicktex'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'lervag/vimtex'
 Plug 'kien/ctrlp.vim'
+"Plug 'jdkanani/vim-material-theme'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jdkanani/vim-material-theme'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-"Plug 'w0rp/ale'
-"Plug 'roxma/nvim-completion-manager'
-Plug 'majutsushi/tagbar'
-Plug 'PotatoesMaster/i3-vim-syntax'
-
+"Plug 'PotatoesMaster/i3-vim-syntax'
+"Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
+"Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
+
 "COLORSCHEME
-set background=light
-colorscheme gruvbox
-let g:airline_theme='base16_default'
+"let g:airline_theme='base16_default'   "Toolbar color
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"benjamin things
-set nocompatible
+set t_Co=256
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
+
+
+set background=dark  "Font color
+"colorscheme gruvbox  "Background color
+"set nocompatible
 set ts=4 "tab 4
 set tabstop=4
 set shiftwidth=4
@@ -48,6 +55,8 @@ set ignorecase
 set hlsearch
 set foldmethod=syntax
 set foldlevel=1
+set colorcolumn=81
+
 "easir split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
