@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://github.com/Christovis/dotfiles/dotfiles-logo-stacked.png" alt="dotfiles stacked logo" width="100">
+   <img src="https://github.com/Christovis/dotfiles/blob/master/dotfiles-logo-stacked.png" alt="dotfiles stacked logo" width="100">
 </p>
 
 # Dotfiles
