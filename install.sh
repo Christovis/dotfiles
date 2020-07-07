@@ -5,6 +5,8 @@
 #
 # Requirements:
 #    - wmctrl
+#    - nvm
+#    - zsh, tmux, zsh, neovim
 #
 # Inspired by https://github.com/iamrecursion/dotfiles
 ############################
@@ -224,6 +226,10 @@ install () {
     link_neovim || exit 1
     link_tmux || exit 1
     link_gdb || exit 1
+    #link_termite || exit 1
+    #if [[ ${wm} == "${wm_i3}" ]]; then
+    #	    link_polybar || exit 1
+    #fi
 
     create_gitconfig || exit 1
 }
@@ -276,8 +282,8 @@ main () {
     
     # Installs
     preinstall
-    install
-    postinstall  # Copy and Edit Gitconfig
+    #install
+    #postinstall  # Copy and Edit Gitconfig
 }
 
 # -----------------------------------------------------------------------------
