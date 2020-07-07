@@ -1,0 +1,15 @@
+[submodule "modules/dircolors-solarized"]
+	path = modules/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized
+[submodule "modules/gdb-dashboard"]
+	path = modules/gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard
+[submodule "modules/tpm"]
+	path = modules/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "modules/vim-plug"]
+	path = modules/vim-plug
+	url = https://github.com/junegunn/vim-plug
+[submodule "modules/zplug"]
+	path = modules/zplug
+	url = https://github.com/zplug/zplug

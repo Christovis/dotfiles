@@ -1,0 +1,109 @@
+# Get the shell evaluation context
+[[ $ZSH_EVAL_CONTEXT == 'toplevel:file' ]];
+file_being_sourced=$?
+
+# Compinstall ================================================================
+
+# The following lines were added by compinstall
+#zstyle :compinstall filename '/home/ara/.zshrc'
+#autoload -Uz compinit
+#compinit End of lines added by compinstall
+
+# Get Operating System =======================================================
+
+platform=""
+
+platform_macos="macos"
+platform_linux="linux"
+platform_wsl="wsl"
+
+detect_platform () {
+    if [[ "${OSTYPE}" == "linux-gnu" ]]; then
+        platform=${platform_linux}
+    elif [[ "${OSTYPE}" == "darwin"* ]]; then
+        platform=${platform_macos}
+    else
+        >&2 echo "Unknown platform";
+        return 1;
+    fi
+}
+detect_platform
+
+# Locale =====================================================================
+
+if [[ "${platform}" == "${platform_linux}" ]]; then
+    export LANG='en_GB.UTF-8'
+    export LANGUAGE='en_GB.UTF-8'
+    export LC_ALL='en_GB.UTF-8'
+    export LC_MESSAGES='en_GB.UTF-8'
+fi
+
+
+# ZPlug ======================================================================
+
+source ~/.dotfiles/modules/zplug/init.zsh
+
+# Load Plugins (Handling some potential Crashes)
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search", \
+    use:"./zsh-history-substring-search.zsh", \
+    on:"zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/compleat", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
+zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
+zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
+zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
+zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
+zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
+
+# Load OMZ
+zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
+
+# Load Theme
+zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme"
+
+# Install Plugins
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
+
+
+
+
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/usr/share/oh-my-zsh/
+
+
+plugins=(git)
+
+ZSH_THEME="agnoster"
+source $ZSH/oh-my-zsh.sh
+
+if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+	    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Aliases =====================================================================
+alias termitetheme='~/dotfiles/termite/schemeChange.sh'
+alias cosma5='ssh -Y dc-beck3@login.cosma.dur.ac.uk'
+alias cosma6='ssh -Y dc-beck3@login6.cosma.dur.ac.uk'
+alias cosmajupyter='ssh -L 8443:172.17.100.24:8000 -N cosma-c'
+alias notebook-server='jupyter-notebook --no-browser --port=8988'
+
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+
