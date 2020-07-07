@@ -27,7 +27,7 @@ status_prefix="INFO >>";
 
 # -----------------------------------------------------------------------------
 detect_wm () {
-    # identify the window manager that is used
+# identify the window manager that is used
     if [[ $(wmctrl -m) =~ 'GNOME' ]]; then
         wm=${wm_gnome}
     elif [[ $(wmctrl -m) =~ 'i3' ]]; then
@@ -118,6 +118,7 @@ ERR
 
 
 preinstall () {
+# creates links to dependent git repos (mostly for zsh functionalities)
 cat << STATUS
 ============================ SETTING UP ENVIRONMENT ===========================
 STATUS
