@@ -1,0 +1,20 @@
+#############
+## Editors ##
+#############
+
+.projections.json
+
+#####################
+## IDE Integration ##
+#####################
+
+*@neomake*
+.metals
+.idea
+
+##################
+## System Files ##
+##################
+
+.DS_Store
+

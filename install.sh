@@ -223,9 +223,9 @@ create_gitconfig () {
 
 install () {
     link_zsh || exit 1
-    link_neovim || exit 1
-    link_tmux || exit 1
-    link_gdb || exit 1
+    #link_neovim || exit 1
+    #link_tmux || exit 1
+    #link_gdb || exit 1
     #link_termite || exit 1
     #if [[ ${wm} == "${wm_i3}" ]]; then
     #	    link_polybar || exit 1
@@ -282,7 +282,7 @@ main () {
     
     # Installs
     preinstall
-    #install
+    install
     #postinstall  # Copy and Edit Gitconfig
 }
 
