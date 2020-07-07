@@ -13,3 +13,9 @@
 [submodule "modules/zplug"]
 	path = modules/zplug
 	url = https://github.com/zplug/zplug
+[submodule "submodules/dircolors-solarized"]
+	path = submodules/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized
+[submodule "submodules/zplug"]
+	path = submodules/zplug
+	url = https://github.com/zplug/zplug
