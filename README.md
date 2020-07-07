@@ -3,4 +3,4 @@
 </p>
 
 This repo contains my dotfiles. It provides default configuration for the set of
-applications that I use every day in the terminal
+applications that I use every day in the terminal.

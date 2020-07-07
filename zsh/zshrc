@@ -40,7 +40,7 @@ fi
 
 # ZPlug ======================================================================:
 
-source ~/.dotfiles/modules/zplug/init.zsh
+source ~/.dotfiles/submodules/zplug/init.zsh
 
 # Load Plugins (Handling some potential Crashes)
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -58,6 +58,7 @@ zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
 zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
 zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
+zplug "lukechilds/zsh-nvm", from:github, use:"./zsh-nvm.plugin.zsh"
 
 # Load OMZ
 zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
@@ -106,8 +107,8 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # ZSH Autosuggestions Configuration
-bindkey "^ " autosuggest-accept
-bindkey "^H" autosuggest-clear
+#bindkey "^ " autosuggest-accept
+#bindkey "^H" autosuggest-clear
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -124,6 +125,8 @@ export PAGER="less -R"
 # Neovim Configuration
 alias nvimrc="nvim ~/.dotfiles/nvim/init.vim"
 alias nvi="nvim"
+alias vim="nvim"
+alias vi="nvim"
 
 # Tmux Configuration
 alias tmuxconf="nvim ~/.dotfiles/tmux/tmux.conf"
@@ -146,8 +149,12 @@ fi
 if [[ ${platform} == "${platform_macos}" ]]; then
     alias ls="gls -F --color=auto --group-directories-first";
 elif [[ ${platform} == "${platform_linux}" ]]; then
-    alias ls="gls -F --color=auto --group-directories-first";
+    alias ls="ls -G -F --color=auto --group-directories-first";
 fi
+
+alias ll="ls -lh"
+alias lll="ls -lah"
+alias cdh="cd ~/"
 
 # Time Enhancement
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
@@ -165,29 +172,29 @@ function mkcd() {
     cd $1
 }
 
-# Dircolors
+# Dircolors (for xterm terminal emulator)
 if [[ "${platform}" == "macos" ]]; then
-    eval `gdircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
+    eval `gdircolors ~/.dotfiles/submodules/dircolors-solarized/dircolors.ansi-light`
 else
-    eval `dircolors ~/.dotfiles/modules/dircolors-solarized/dircolors.256dark`
+    eval `dircolors ~/.dotfiles/submodules/dircolors-solarized/dircolors.ansi-light`
 fi
 
 # Input Control
-autoload zkbd
-[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
-source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+#autoload zkbd
+#[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
+#source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
 
-[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+#[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+#[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+#[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+#[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+#[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+#[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+#[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+#[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+#[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+#[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+#[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
 
 # Useful Dev Tooling
@@ -218,7 +225,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=/usr/share/oh-my-zsh/
 
-plugins=(git)
+# Java environment
+export PATH=${/home/christovis/.nvm/versions/node/v14.5.0/lib/node_modules/npm/bin}:$PATH
 
 # Powerline
 if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
@@ -230,11 +238,19 @@ fi
 
 # DIRAC/COSMA Interactions
 alias termitetheme='~/dotfiles/termite/schemeChange.sh'
-alias cosma5='ssh -Y dc-beck3@login.cosma.dur.ac.uk'
-alias cosma6='ssh -Y dc-beck3@login6.cosma.dur.ac.uk'
-alias cosmajupyter='ssh -L 8443:172.17.100.24:8000 -N cosma-c'
-alias notebook-server='jupyter-notebook --no-browser --port=8988'
+alias cosma5='ssh -Y dc-beck3@login5.cosma.dur.ac.uk'
+alias cosma6='ssh -Y dc-beck3@login6.cosma.dur.ac.uk '
+alias cosma7='ssh -Y dc-beck3@login7.cosma.dur.ac.uk'
+alias cosma7b='ssh -L 8443:login7b.cosma.dur.ac.uk:443 dc-beck3@login7b.cosma.dur.ac.uk"'
+alias cosmaa='ssh -Y dc-beck3@login5a.cosma.dur.ac.uk'
+alias cosmab='ssh -Y dc-beck3@login5b.cosma.dur.ac.uk'
+alias cosmajupyter="ssh -XY dc-beck3@cosma-a.cosma.dur.ac.uk 'jupyter-notebook --no-browser'"
+alias tunnel='ssh -L localhost:8891:127.0.0.1:8889 -N dc-beck3@login5b.cosma.dur.ac.uk'
+alias gpu='ssh -Y zcxn55@129.234.62.89'
+alias printer='ssh -Y vtfp28@stargate.dur.ac.uk'
 
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# for npm installation
+export PATH=/usr/lib/node_modules/npm/bin:$PATH

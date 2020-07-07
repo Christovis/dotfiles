@@ -1,12 +1,14 @@
 #!/bin/bash
 ############################
 # This script creates symlinks from the home directory to
-# any desired dotfiles in ~/dotfiles
+# any desired dotfiles in ~/.dotfiles
 #
-# Requirements:
+# Terminal Emulator:
+#    - Konsole (default for Manjaro GNOME)
+# Additional Requirements:
 #    - wmctrl
-#    - nvm
-#    - zsh, tmux, zsh, neovim
+#    - nvm, zsh, tmux, zsh, zplug
+#    - neovim: Python 3, Ruby, and Node.js
 #
 # Inspired by https://github.com/iamrecursion/dotfiles
 ############################
@@ -144,29 +146,33 @@ link_zsh () {
 
 
 link_neovim () {
+    # initialise settings
     echo "${status_prefix} Linking Neovim Configuration"
-
     nvimrc_dir="${HOME}/.config/nvim"
-    nvim_plugs_dir="${HOME}/.local/share/nvim/site"
+    nvim_plugs_dir="${HOME}/.local/share/nvim/plugged"
 
+    # create directory
     if [ ! -d  "${nvimrc_dir}" ]; then
         echo "${status_prefix} Creating "${nvimrc_dir}" for Nvim \
             configuration";
         mkdir -p "${nvimrc_dir}"
     fi
 
-    ln -sf "${DIR}/nvim/init.vim" "${nvimrc_dir}/init.vim"
-    ln -sf "${DIR}/nvim/coc-settings.json" "${nvimrc_dir}/coc-settings.json"
-
     if [ ! -d "${nvim_plugs_dir}" ]; then
         echo "${status_prefix} Creating "${nvim_plugs_dir}" for plugins";
         mkdir -p "${nvim_plugs_dir}"
     fi
 
-    if [ ! -e "${nvim_plugs_dir}/autoload" ]; then
-        ln -sf "${DIR}/nvim/autoload" "${nvim_plugs_dir}/autoload"
-    fi
+    # create symlinks
+    ln -sf "${DIR}/nvim/init.vim" "${nvimrc_dir}/init.vim"
+    ln -sf "${DIR}/nvim/coc-settings.json" "${nvimrc_dir}/coc-settings.json"
 
+    #if [ ! -e "${nvim_plugs_dir}/autoload" ]; then
+    #    ln -sf "${DIR}/nvim/autoload" "${nvim_plugs_dir}/autoload"
+    #fi
+
+    # set up npm for CoC code completion (needs to be installed after zsh set-up)
+    # npm install -g neovim
     return 0
 }
 
@@ -223,7 +229,7 @@ create_gitconfig () {
 
 install () {
     link_zsh || exit 1
-    #link_neovim || exit 1
+    link_neovim || exit 1
     #link_tmux || exit 1
     #link_gdb || exit 1
     #link_termite || exit 1
@@ -279,7 +285,7 @@ main () {
     detect_wm || exit 1
     confirm "Install dotfiles for ${wm} window manager?"|| exit
     install_system_package "${system_deps}" || exit 1
-    
+
     # Installs
     preinstall
     install
