@@ -30,7 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'jiangmiao/auto-pairs'
    Plug 'jistr/vim-nerdtree-tabs'
    Plug 'junegunn/vim-plug'
-   Plug 'kassio/neoterm'
+   "Plug 'kassio/neoterm'
    "Plug 'LnL7/vim-nix'
    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
    Plug 'mhinz/neovim-remote', { 'do': 'pip3 install --user neovim-remote' }
