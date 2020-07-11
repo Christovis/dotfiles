@@ -3,12 +3,14 @@
 # This script creates symlinks from the home directory to
 # any desired dotfiles in ~/.dotfiles
 #
+# Operation System:
+#    - Manjaro
 # Terminal Emulator:
 #    - Konsole (default for Manjaro GNOME)
-# Additional Requirements:
+# Requirements:
 #    - wmctrl
 #    - nvm, zsh, tmux, zsh, zplug
-#    - neovim: Python 3, Ruby, and Node.js
+#    - neovim: Python 3, Node.js
 #
 # Inspired by https://github.com/iamrecursion/dotfiles
 ############################
@@ -122,7 +124,7 @@ ERR
 
 
 preinstall () {
-# creates links to dependent git repos (mostly for zsh functionalities)
+# installs dependent git repos (mostly for zsh functionalities)
 cat << STATUS
 ============================ SETTING UP ENVIRONMENT ===========================
 STATUS
