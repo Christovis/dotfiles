@@ -147,6 +147,15 @@ link_zsh () {
 }
 
 
+link_termite () {
+    echo "${status_prefix} Linking Termite Configuration"
+
+    ln -sf ${DIR}/termite/config ${HOME}/.config/termite/config
+
+    return 0
+}
+
+
 link_neovim () {
     # initialise settings
     echo "${status_prefix} Linking Neovim Configuration"
@@ -175,6 +184,25 @@ link_neovim () {
 
     # set up npm for CoC code completion (needs to be installed after zsh set-up)
     # npm install -g neovim
+    return 0
+}
+
+
+link_ergodox () {
+    # Setting up ErgoDox-EZ keyboard environment
+    # Based on the following instructions:
+    #   - https://github.com/zsa/wally/wiki/Linux-install
+    #   - https://github.com/zsa/wally/wiki/Live-training-on-Linux
+    echo "${status_prefix} Linking ErgoDox-EZ configuration"
+
+    ln -sf "${DIR}/ergodox/50-oryx.rules" "/etc/udev/rules.d/50-oryx.rules"
+
+    # Make sure your user is part of the plugdev group
+    # (as it is not the default on some distros):
+    sudo pacman -S gtk3 webkit2gtk libusb
+    sudo groupadd plugdev
+    sudo usermod -aG plugdev $USER
+
     return 0
 }
 
@@ -232,9 +260,9 @@ create_gitconfig () {
 install () {
     link_zsh || exit 1
     link_neovim || exit 1
+    link_termite || exit 1
     #link_tmux || exit 1
     #link_gdb || exit 1
-    #link_termite || exit 1
     #if [[ ${wm} == "${wm_i3}" ]]; then
     #	    link_polybar || exit 1
     #fi

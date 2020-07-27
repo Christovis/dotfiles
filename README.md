@@ -17,7 +17,9 @@ and configures
 - `tmux`: A configuration that tries makes using tmux intuitive, and also allows
   for seamless interoperation with Neovim. [-]
 - `zsh`: A configurations including a custom theme with a _useful_ prompt clock. [-]
+- `termite`:  highly customizable terminal emulator
 - `polybar`:  highly customizable status bars for their desktop environmen. [i3]
+- `ergodox-ez`:  highly customizable keyboard
 
 ## Installation
 This repo comes with a simple install script that eases the installation process
