@@ -6,7 +6,8 @@ This repo contains my dotfiles. It provides default configuration for the set of
 applications that I use day-to-day.
 
 It currently supports:
-- **OS**: Manjaro-GNOME/i3
+- **OS**: Manjaro
+- DE: Gnome (+ Pop_Shell), i3 (+ extentions)
 - **Terminal**: Konsole, Termite
 
 and configures
