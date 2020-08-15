@@ -7,7 +7,7 @@ applications that I use day-to-day.
 
 It currently supports:
 - **OS**: Manjaro
-- DE: Gnome (+ Pop_Shell), i3 (+ extentions)
+- **DE**: Gnome (+ Pop_Shell), i3 (+ extentions)
 - **Terminal**: Konsole, Termite
 
 and configures
