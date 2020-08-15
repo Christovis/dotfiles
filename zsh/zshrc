@@ -233,6 +233,15 @@ if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.z
 	    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
+# Monitor Settings
+alias dualmonitor='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
+alias dualmonitor2='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
+alias dualup='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --above eDP1'
+alias dualleft='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
+alias dualright='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
+alias singlemonitor='xrandr --auto --output HDMI2 --off'
+alias screenonly='xrandr --auto --output eDP1 --off'
+
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

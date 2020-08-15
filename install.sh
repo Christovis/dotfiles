@@ -35,12 +35,33 @@ status_prefix="INFO >>";
 detect_wm () {
 # identify the window manager that is used
     if [[ $(wmctrl -m) =~ 'GNOME' ]]; then
-        wm=${wm_gnome}
+        read -p "Do you want to create environment for the GNOME window manager?" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            wm=${wm_gnome}
+        else
+            read -p "What environment do you want to create? i3 or Gnome" -n 1 -r
+            echo
+            if [[ "$REPLY" =~ i3 ]]; then
+                wm=${wm_i3}
+            else
+                wm=${wm_gnome}
+            fi
+        fi
     elif [[ $(wmctrl -m) =~ 'i3' ]]; then
-        wm=${wm_i3}
-    else
-        >&2 echo "Unknown window manager";
-        return 1;
+        read -p "Do you want to create environment for the i3 window manager?" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            wm=${wm_i3}
+        else
+            read -p "What environment do you want to create? i3 or Gnome" -n 1 -r
+            echo
+            if [[ "$REPLY" =~ i3 ]]; then
+                wm=${wm_i3}
+            else
+                wm=${wm_gnome}
+            fi
+        fi
     fi
 }
 
@@ -189,11 +210,10 @@ link_neovim () {
 
 
 link_ergodox () {
-    # Setting up ErgoDox-EZ keyboard environment
+    echo "${status_prefix} Linking ErgoDox-EZ configuration"
     # Based on the following instructions:
     #   - https://github.com/zsa/wally/wiki/Linux-install
     #   - https://github.com/zsa/wally/wiki/Live-training-on-Linux
-    echo "${status_prefix} Linking ErgoDox-EZ configuration"
 
     ln -sf "${DIR}/ergodox/50-oryx.rules" "/etc/udev/rules.d/50-oryx.rules"
 
@@ -206,6 +226,46 @@ link_ergodox () {
     return 0
 }
 
+link_pop_shell () {
+    echo "${status_prefix} Setting up Pop_shell"
+    // https://github.com/pop-os/shell
+
+    git clone https://github.com/pop-os/shell.git
+    cd shell
+    sh rebuild.sh
+}
+
+
+link_i3 () {
+    echo "${status_prefix} Linking i3 configuration"
+    # Based on the following instructions:
+    #   - https://github.com/Airblader/i3/wiki/installation
+    #   - https://github.com/polybar/polybar
+
+    # Make sure your user is part of the plugdev group
+    # (as it is not the default on some distros):
+    sudo pacman -S i3-gaps polybar compton-conf
+
+    i3_dir="${HOME}/.i3/"
+    polybar_dir="${HOME}/.config/polybar/"
+    mkdir -p "${i3_dir}"
+    mkdir -p "${polybar_dir}"
+
+    ln -sf "${DIR}/i3/i3.conf" "${i3_dir}/conf"
+    ln -sf "${DIR}/i3/i3blocks.conf" "${i3_dir}/i3blocks.conf"
+    ln -sf "${DIR}/polybar/battery.py" "${polybar_dir}battery.py"
+    ln -sf "${DIR}/polybar/bluetooth.sh" "${polybar_dir}bluetooth.sh"
+    ln -sf "${DIR}/polybar/config" "${polybar_dir}config"
+    ln -sf "${DIR}/polybar/launch.sh" "${polybar_dir}launch.sh"
+    ln -sf "${DIR}/polybar/mpris.sh" "${polybar_dir}mpris.sh"
+    ln -sf "${DIR}/polybar/musicWorkspaceSwitcher.sh" "${polybar_dir}musicWorkspaceSwitcher.sh"
+    ln -sf "${DIR}/polybar/pavolume.sh" "${polybar_dir}pavolume.sh"
+    ln -sf "${DIR}/polybar/playpause.sh" "${polybar_dir}playpause.sh"
+    ln -sf "${DIR}/polybar/redshift.sh" "${polybar_dir}redshift.sh"
+    ln -sf "${DIR}/i3/compton.conf" "${HOME}/.config/compton.conf"
+
+    return 0
+}
 
 link_tmux () {
     echo "${status_prefix} Linking Tmux configuration"
@@ -258,9 +318,11 @@ create_gitconfig () {
 
 
 install () {
+    link_i3 || exit 1
     link_zsh || exit 1
     link_neovim || exit 1
     link_termite || exit 1
+    link_ergodox || exit 1
     #link_tmux || exit 1
     #link_gdb || exit 1
     #if [[ ${wm} == "${wm_i3}" ]]; then
