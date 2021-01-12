@@ -74,7 +74,8 @@ imap <S-Tab> <BS>
 set autoindent
 set cursorline
 set expandtab
-set number
+set number relativenumber
+set nu rnu
 set pumheight=10
 set ruler
 set scrollback=1000

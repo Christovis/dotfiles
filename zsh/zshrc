@@ -53,7 +53,7 @@ zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/compleat", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
-zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
+#zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
 zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
@@ -107,19 +107,15 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # ZSH Autosuggestions Configuration
-#bindkey "^ " autosuggest-accept
-#bindkey "^H" autosuggest-clear
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
-ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Timezone (Only Set on Linux)
 if [[ "${platform}" == "${platform_linux}" ]]; then
     export TZ="Europe/London"
 fi
 
-# Basic Tool Setup
-export EDITOR=nvim
+# Basic Tool Setup export EDITOR=nvim
 export PAGER="less -R"
 
 # Neovim Configuration
@@ -139,11 +135,11 @@ alias reload="source ~/.dotfiles/zsh/zshrc"
 alias nettest="ping 8.8.8.8"
 alias dnstest="ping google.com"
 
-# MacOS Specific Utility Aliases
-if [[ ${platform} == "${platform_macos}" ]]; then
-    alias resetcam="sudo killall VDCAssistant"
-    alias resetcam!="sudo killall VDCAssistant"
-fi
+## MacOS Specific Utility Aliases
+#if [[ ${platform} == "${platform_macos}" ]]; then
+#    alias resetcam="sudo killall VDCAssistant"
+#    alias resetcam!="sudo killall VDCAssistant"
+#fi
 
 # Navigation Aliases
 if [[ ${platform} == "${platform_macos}" ]]; then
