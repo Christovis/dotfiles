@@ -1,4 +1,3 @@
-
 " Vim-Plug configuration ======================================================
 
 let g:plug_shallow=0
@@ -360,6 +359,14 @@ call coc#add_extension('coc-vimlsp')
 call coc#add_extension('coc-vimtex')
 call coc#add_extension('coc-xml')
 call coc#add_extension('coc-yaml')
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 set hidden
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"

@@ -318,11 +318,11 @@ create_gitconfig () {
 
 
 install () {
-    link_i3 || exit 1
-    link_zsh || exit 1
+    #link_i3 || exit 1
+    #link_zsh || exit 1
     link_neovim || exit 1
-    link_termite || exit 1
-    link_ergodox || exit 1
+    #link_termite || exit 1
+    #link_ergodox || exit 1
     #link_tmux || exit 1
     #link_gdb || exit 1
     #if [[ ${wm} == "${wm_i3}" ]]; then
@@ -379,7 +379,7 @@ main () {
     install_system_package "${system_deps}" || exit 1
 
     # Installs
-    preinstall
+    #preinstall
     install
     #postinstall  # Copy and Edit Gitconfig
 }
