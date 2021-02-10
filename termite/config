@@ -1,5 +1,4 @@
 [colors]
-[colors]
 # Base16 Gruvbox light, medium
 # Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
 
@@ -53,6 +52,6 @@ color21 = #3c3836
 #font = Sans 12
 #font = System San Francisco Display Thin 12
 font = Meslo LG M for Powerline 12
-#font = Roboto Mono Light for Powerline 
+#font = Roboto Mono Light for Powerline
 #font = Droid Sans Mono 8
 
