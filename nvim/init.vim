@@ -75,7 +75,7 @@ set cursorline
 set expandtab
 set number relativenumber
 set nu rnu
-set pumheight=10
+set pumheight=1
 set ruler
 set scrollback=1000
 set scrolloff=10
