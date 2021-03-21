@@ -9,7 +9,8 @@
 #    - Konsole (default for Manjaro GNOME)
 # Requirements:
 #    - wmctrl
-#    - nvm, zsh, tmux, zsh, zplug
+#    - snapcraft (for Node.js)
+#    - nvm, tmux, zsh, zplug
 #    - neovim: Python 3, Node.js
 #
 # Inspired by https://github.com/iamrecursion/dotfiles

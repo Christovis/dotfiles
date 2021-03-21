@@ -2,13 +2,6 @@
 [[ $ZSH_EVAL_CONTEXT == 'toplevel:file' ]];
 file_being_sourced=$?
 
-# Compinstall ================================================================:
-
-# The following lines were added by compinstall
-#zstyle :compinstall filename '/home/ara/.zshrc'
-#autoload -Uz compinit
-#compinit End of lines added by compinstall
-
 # Get Operating System =======================================================:
 
 platform=""
@@ -52,16 +45,10 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/compleat", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
-zplug "hchbaw/zce.zsh", from:github, use:"./zce.zsh"
-#zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
-zplug "psprint/ztrace", from:github, use:"./ztrace.plugin.zsh"
 zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
 zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
-zplug "lukechilds/zsh-nvm", from:github, use:"./zsh-nvm.plugin.zsh"
-
-# Load OMZ
-zplug "robbyrussell/oh-my-zsh", use:"./lib/*.zsh"
+zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
 
 # Load Theme
 zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme"
@@ -76,12 +63,16 @@ fi
 
 zplug load
 
+
 # Additional Configuration ===================================================:
 
+# Path to your oh-my-zsh installation.
+export ZSH=/usr/share/oh-my-zsh/
+
 # History Configuration
-HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Matching Configuration
 setopt autocd             # Allows typing a directory name to cd to it
@@ -94,52 +85,37 @@ setopt inc_append_history # Dynamically append to history
 unsetopt appendhistory
 unsetopt beep
 
-# Keymap
-bindkey -v
-KEYTIMEOUT=1
-
-# Enhancd Configuration
-export ENHANCD_DOT_ARG=0
-
 # History Substring Search Keybindings
 zmodload zsh/terminfo
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-
-# ZSH Autosuggestions Configuration
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 
 # Timezone (Only Set on Linux)
 if [[ "${platform}" == "${platform_linux}" ]]; then
     export TZ="Europe/London"
 fi
 
-# Basic Tool Setup export EDITOR=nvim
-export PAGER="less -R"
+# Time Enhancement
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Aliases ==================================================================:
 
 # Neovim Configuration
-alias nvimrc="nvim ~/.dotfiles/nvim/init.vim"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias nvi="nvim"
 alias vim="nvim"
 alias vi="nvim"
 
-# Tmux Configuration
-alias tmuxconf="nvim ~/.dotfiles/tmux/tmux.conf"
-
 # ZSH Configuration
-alias zshrc="nvim ~/.dotfiles/zsh/zshrc"
-alias reload="source ~/.dotfiles/zsh/zshrc"
+alias zshrc="nvim ~/.zshrc"
+alias reload="source ~/.zshrc"
 
 # Generic Utility Aliases
 alias nettest="ping 8.8.8.8"
 alias dnstest="ping google.com"
-
-## MacOS Specific Utility Aliases
-#if [[ ${platform} == "${platform_macos}" ]]; then
-#    alias resetcam="sudo killall VDCAssistant"
-#    alias resetcam!="sudo killall VDCAssistant"
-#fi
 
 # Navigation Aliases
 if [[ ${platform} == "${platform_macos}" ]]; then
@@ -148,101 +124,13 @@ elif [[ ${platform} == "${platform_linux}" ]]; then
     alias ls="ls -G -F --color=auto --group-directories-first";
 fi
 
+# Listing
 alias ll="ls -lh"
 alias lll="ls -lah"
 alias cdh="cd ~/"
-
-# Time Enhancement
-export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
-
-# Tmux Utility Functions
-function redisp() {
-    if [ -n "$TMUX" ]; then
-        eval "export $(tmux show-environment DISPLAY)"
-    fi
-}
-
-# Mkdir Utility Function
-function mkcd() {
-    mkdir -p $1;
-    cd $1
-}
-
-# Dircolors (for xterm terminal emulator)
-if [[ "${platform}" == "macos" ]]; then
-    eval `gdircolors ~/.dotfiles/submodules/dircolors-solarized/dircolors.ansi-light`
-else
-    eval `dircolors ~/.dotfiles/submodules/dircolors-solarized/dircolors.ansi-light`
-fi
-
-# Input Control
-#autoload zkbd
-#[[ ! -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && zkbd
-#source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
-
-#[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-#[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-#[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-#[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-#[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-#[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-#[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-#[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-#[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-#[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-#[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
-
-
-# Useful Dev Tooling
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH=/usr/share/oh-my-zsh/
-
-# Java environment
-export PATH=${/home/christovis/.nvm/versions/node/v14.5.0/lib/node_modules/npm/bin}:$PATH
-
-# Powerline
-if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-	    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
-
-# Monitor Settings
-alias dualmonitor='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
-alias dualmonitor2='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
-alias dualup='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --above eDP1'
-alias dualleft='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
-alias dualright='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
-alias singlemonitor='xrandr --auto --output HDMI2 --off'
-alias screenonly='xrandr --auto --output eDP1 --off'
-
-# FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias cdu="cd .."
 
 # DIRAC/COSMA Interactions
-alias termitetheme='~/dotfiles/termite/schemeChange.sh'
 alias cosma5='ssh -Y dc-beck3@login5.cosma.dur.ac.uk'
 alias cosma6='ssh -Y dc-beck3@login6.cosma.dur.ac.uk '
 alias cosma7='ssh -Y dc-beck3@login7.cosma.dur.ac.uk'
@@ -254,8 +142,11 @@ alias tunnel='ssh -L localhost:8891:127.0.0.1:8889 -N dc-beck3@login5b.cosma.dur
 alias gpu='ssh -Y zcxn55@129.234.62.89'
 alias printer='ssh -Y vtfp28@stargate.dur.ac.uk'
 
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# for npm installation
-export PATH=/usr/lib/node_modules/npm/bin:$PATH
+# Monitor Settings
+alias dualmonitor='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
+alias dualmonitor2='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
+alias dualup='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --above eDP1'
+alias dualleft='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
+alias dualright='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
+alias singlemonitor='xrandr --auto --output HDMI2 --off'
+alias screenonly='xrandr --auto --output eDP1 --off'
