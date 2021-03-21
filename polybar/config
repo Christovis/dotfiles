@@ -1,60 +1,57 @@
-; Polybar Config
-; Color theme: Summertime 2 Color Palette
-;			  - color in order of importance: green, orange, red
-;
-; General Settings ------------------------------------------------------------
-
 [global/wm]
 margin-top = 0
 margin-bottom = 0
 
+
 [colours]
-bg = #317256
-bg_bar = #000000cc
-fg = #52bf90
-between = #419873
-icon = #e39e54
-maia = #FF4444
-text= #e8d174
-red = #ff4d4d
-clear = #00
+bg = #1d2229
+icons = #e8e8e8
+white = #e8e8e8
+red =   #ff4d4d
+grey =  #C0C0C0
+clear = #DCDCDC
+yellow = #f9a825
+
 
 [bar/top]
-monitor = eDP-1
+;monitor = eDP-1
+;monitor = HDMI-2
+;monitor = DP-1
+monitor = ${env:MONITOR:}
 width = 100%
-height = 25
+height = 30
 radius = 0
+;bottom = true
 fixed-center = true 
-foreground = $(colours.fg)
-background = ${colours.bg_bar}
+background = ${colours.bg}
+foreground = ${colours.icons}
+
 border-size = 0
 border-bottom-size = 0
-padding = 3
+
+border-color =${colours.clear}
+border-bottom-color = ${colours.clear}
+
+border-top-size = 0 
+border-top-color = ${colours.clear}
+
+padding = 1
 module-margin = 1 
 
-;font-0 = Roboto Slab:size=10:weight=Regular;1
-;font-0 = Poly:size=11:weight=Light;1
-font-0 = System San Francisco Display:size=10;2
-;font-0 = Hack:weight=Regular:size=10;1
-;font-0 = Source Code Pro:weight=Regular:size=10;1
-font-1 = FontAwesome:size=12;3
-font-2 = MaterialIcons:size=13;5
-font-3 = URW Gothic:size=11;2
-font-4 = Raleway VF Beta:size=11:weight=Regular;1
-;http://fontawesome.io/cheatsheet/
-;https://shanfan.github.io/material-icons-cheatsheet/
+font-0 = Fantasque Sans Mono:size=12;1
+font-1 = FontAwesome5Free:style=Solid:pixelsize=10:antialias=false;3
+font-2 = FontAwesome5Brands:style=Solid:pixelsize=10:antialias=false;3
 
 modules-left   = memory cpu
 modules-center = i3 
-modules-right  = pavolume backlight redshift battery1 battery2 wireless-network clock powermenubarlauncher
+modules-right  = pulseaudio battery battery1 clock 
 
 ; override-redirect = true
 ; wm-restack = i3
 tray-position = right
 tray-padding = 0
 
-; Modules ---------------------------------------------------------------------
-[global/wm]
+
 [module/i3]
 type = internal/i3
 strip-wsnumbers = false
@@ -62,7 +59,7 @@ enable-click = true
 enable-scroll = true
 reverse-scroll = true
 ;fuzzy-match = true
-; ws-icon-0 = 1;%{F#8859ff}
+
 ws-icon-0 = 1;%{T4}1%{T-}
 ws-icon-1 = 2;%{T4}2%{T-}
 ws-icon-2 = 3;%{T4}3%{T-}
@@ -71,264 +68,324 @@ ws-icon-4 = 5;%{T4}5%{T-}
 ws-icon-5 = 6;%{T4}6%{T-}
 ws-icon-6 = 7;%{T4}7%{T-}
 ws-icon-7 = 8;%{T4}8%{T-}
-ws-icon-8 = 9;%{F#e44332}
-ws-icon-9 = 10;%{T4}10%{T-}
-ws-icon-10 = ;%{F#1ED760}
-ws-icon-11 = ;
+ws-icon-8 = 9;%{T4}9%{T-}
+;ws-icon-9 = 10;%{T4}10%{T-}
+kws-icon-10 = 11;%{T4}11%{T-}
+
 format = <label-mode> <label-state> <label-mode>
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-foreground = #9ed670
-label-mode-background = ${colours.maia}
+label-mode-foreground = ${colours.white}
+label-mode-background = ${colours.icons}
+
 label-focused = %icon% 
-label-focused-foreground = #4d7358
-label-focused-background = ${colours.icon}
-label-focused-underline = #d64d4d
-label-focused-padding = 4
+label-focused-foreground = ${colours.white}
+label-focused-background = #3f3f3f
+label-focused-underline =#fba922
+label-focused-padding = 2
+
 label-unfocused = %icon% 
-label-unfocused-foreground = #e8d174
-label-unfocused-padding = 4
+label-unfocused-foreground = ${colours.white}
+label-unfocused-padding = 2
+
 label-visible = %icon%
-label-visible-underline = #d64d4d
-label-visible-padding = 4
+label-visible-underline = #555555
+label-visible-padding = 2
+
 label-urgent = %icon%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
-label-urgent-padding = 4
+label-urgent-padding = 2
+
 
 [module/cpu]
 type = internal/cpu
-interval = 1
+interval = 0.5
+
 format = <label> <ramp-coreload>
-label = %{F#e8d174}CPU %percentage%%
+label = CPU
+
 ramp-coreload-0 = ▁
-ramp-coreload-0-font = 3
-ramp-coreload-0-foreground = #9ed670
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #55aa55
 ramp-coreload-1 = ▂
-ramp-coreload-1-font = 3
-ramp-coreload-1-foreground = #A6C26B
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #55aa55
 ramp-coreload-2 = ▃
-ramp-coreload-2-font = 3
-ramp-coreload-2-foreground = #AEAF66
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #55aa55
 ramp-coreload-3 = ▄
-ramp-coreload-3-font = 3
-ramp-coreload-3-foreground = #B69B61
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #55aa55
 ramp-coreload-4 = ▅
-ramp-coreload-4-font = 3
-ramp-coreload-4-foreground = #BE885C
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #f5a70a
 ramp-coreload-5 = ▆
-ramp-coreload-5-font = 3
-ramp-coreload-5-foreground = #C67457
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #f5a70a
 ramp-coreload-6 = ▇
-ramp-coreload-6-font = 3
-ramp-coreload-6-foreground = #CE6152
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
 ramp-coreload-7 = █
-ramp-coreload-7-font = 3
-ramp-coreload-7-foreground = #D64D4D
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+
+bar-load-width = 20
+bar-load-foreground-0 = #55aa55
+bar-load-foreground-1 = #55aa55
+bar-load-foreground-2 = #f5a70a
+bar-load-foreground-3 = #ff5555
+bar-load-gradient = false
+bar-load-indicator = │
+bar-load-indicator-font = 2
+bar-load-indicator-foreground = #ff5555
+bar-load-fill = ━
+bar-load-fill-font = 2
+bar-load-empty = ━
+bar-load-empty-font = 2
+bar-load-empty-foreground = #444444
+
 
 [module/memory]
 type = internal/memory
+
 interval = 3
-format = " <label> <bar-used> "
-label = RAM
-;%gb_used%/%gb_free%
-label-foreground = ${colours.text}
-bar-used-indicator =
-bar-used-width = 10
-bar-used-foreground-0 = #D64D4D
-bar-used-foreground-1 = #D64D4D
-bar-used-foreground-2 = #D64D4D
-bar-used-foreground-3 = #D64D4D
-bar-used-fill = ▐
-bar-used-empty = ▐
-bar-used-empty-foreground = #83D0C9
+
+format = <label>
+
+label = RAM %gb_used%/%gb_free%
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+; sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+use-ui-max = true
+interval = 5
+format-volume = <ramp-volume> <label-volume>
+;format-muted = <label-muted>
+label-volume = %percentage%%
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+label-muted = 🔇 muted
+label-muted-foreground = #666
+click-right = pavucontrol
+
+
+[module/battery]
+type = internal/battery
+
+battery = BAT0
+adapter = ADP0
+full-at = 100
+
+format-charging = "<animation-charging> <label-charging>"
+format-discharging = " <ramp-capacity> <label-discharging>"
+format-full = " <ramp-capacity> <label-full>"
+
+label-charging-foreground = ${colours.white}
+label-discharging-foreground = ${colours.white}
+label-full-foreground = ${colours.white}
+
+label-charging-font = 0
+label-discharging-font = 0
+label-full-font = 0
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colours.red}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colours.yellow}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colours.icons}
+ramp-capacity-3-foreground = ${colours.icons}
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colours.icons}
+
+animation-charging-0 =  
+animation-charging-0-foreground = ${colours.icons}
+animation-charging-1 =  
+animation-charging-1-foreground = ${colours.icons}
+animation-charging-2 =  
+animation-charging-2-foreground = ${colours.icons}
+animation-charging-3 =  
+animation-charging-3-foreground = ${colours.icons}
+animation-charging-4 =  
+animation-charging-4-foreground = ${colours.icons}
+animation-charging-framerate = 600
+
+
+[module/battery1]
+type = internal/battery
+
+battery = BAT1
+adapter = ADP0
+full-at = 100
+
+format-charging = "<animation-charging> <label-charging>"
+format-discharging = " <ramp-capacity> <label-discharging>"
+format-full = " <ramp-capacity> <label-full>"
+
+label-charging-foreground = ${colours.white}
+label-discharging-foreground = ${colours.white}
+label-full-foreground = ${colours.white}
+
+label-charging-font = 0
+label-discharging-font = 0
+label-full-font = 0
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colours.red}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colours.yellow}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colours.icons}
+ramp-capacity-3-foreground = ${colours.icons}
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colours.icons}
+
+animation-charging-0 =  
+animation-charging-0-foreground = ${colours.icons}
+animation-charging-1 =  
+animation-charging-1-foreground = ${colours.icons}
+animation-charging-2 =  
+animation-charging-2-foreground = ${colours.icons}
+animation-charging-3 =  
+animation-charging-3-foreground = ${colours.icons}
+animation-charging-4 =  
+animation-charging-4-foreground = ${colours.icons}
+animation-charging-framerate = 600
+
 
 [module/clock]
 type = internal/date
 format = " <label> "
 label = %date%
-date = %{F#e39e54} %{F#e8d174}%a %b %d %{F#e8d174}%l:%M:%S %p
+label-foreground = ${colours.icons}
+date =  %{F#e8e8e8}%a %b %d %{F#e8e8e8}%l:%M:%S %p
 label-font = 0
 
-[module/pavolume]
-type = custom/script
-tail = true
-label = " %output% "
-exec = ~/.config/polybar/pavolume.sh --listen
-click-left = amixer -D pulse sset Master toggle
-click-right = exec pavucontrol &
-scroll-down = amixer -D pulse sset Master 2%+
-scroll-up = amixer -D pulse sset Master 2%-  
- 
-[module/bluetooth]
-type = custom/script
-interval = 1
-exec = ~/.config/polybar/bluetooth.sh
-label = "  %output% "
-click-left = blueberry
-click-right = ~/.config/polybar/bluetooth.sh --toggle
-
-[module/redshift]
-type = custom/script
-tail = true
-label = "%output%   "
-exec = ~/.config/polybar/redshift.sh
-click-left = redshift -c ~/.config/redshift.conf &
-click-right = redshift -x && pkill -9 redshift &
-
-[module/battery1]
-type = internal/battery
-battery = BAT0
-adapter = ADP0
-full-at = 100
-format-charging = "<animation-charging> <label-charging>"
-format-discharging = " <ramp-capacity> <label-discharging>"
-format-full = " <ramp-capacity> <label-full>"
-label-charging-foreground = ${colours.text}
-label-discharging-foreground = ${colours.text}
-label-full-foreground = ${colours.text}
-label-charging-font = 0
-label-discharging-font = 0
-label-full-font = 0
-ramp-capacity-0 = 
-ramp-capacity-0-foreground = $(colours.red)
-ramp-capacity-1 = 
-ramp-capacity-1-foreground = #C67457
-ramp-capacity-2 = 
-ramp-capacity-2-foreground = #B69B61
-ramp-capacity-3 = 
-ramp-capacity-3-foreground = #A6C26B
-ramp-capacity-4 = 
-ramp-capacity-4-foreground = #9ed670 
-animation-charging-0 = %{F#9ed670} 
-animation-charging-1 = %{F#9ed670} 
-animation-charging-2 = %{F#9ed670} 
-animation-charging-3 = %{F#9ed670} 
-animation-charging-4 = %{F#9ed670} 
-animation-charging-framerate = 600
-
-[module/battery2]
-type = internal/battery
-battery = BAT1
-adapter = ADP1
-full-at = 100
-format-charging = "<animation-charging> <label-charging>"
-format-discharging = " <ramp-capacity> <label-discharging>"
-format-full = " <ramp-capacity> <label-full>"
-label-charging-foreground = ${colours.text}
-label-discharging-foreground = ${colours.text}
-label-full-foreground = ${colours.text}
-label-charging-font = 0
-label-discharging-font = 0
-label-full-font = 0
-ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colours.red}
-ramp-capacity-1 = 
-ramp-capacity-1-foreground = #C67457
-ramp-capacity-2 = 
-ramp-capacity-2-foreground = #B69B61
-ramp-capacity-3 = 
-ramp-capacity-3-foreground = #A6C26B
-ramp-capacity-4 = 
-ramp-capacity-4-foreground = #9ed670 
-animation-charging-0 = %{F#9ed670} 
-animation-charging-1 = %{F#9ed670} 
-animation-charging-2 = %{F#9ed670} 
-animation-charging-3 = %{F#9ed670} 
-animation-charging-4 = %{F#9ed670} 
-animation-charging-framerate = 600
-
-[module/battery2]
-exec = /home/chrbecker/.config/polybar/battery.py
-interval = 5
 
 [module/wireless-network]
 type = internal/network
-interface = wlp4s0
+interface = wlo1
 interval = 1.0
 ping-interval = 3
 format-connected = <label-connected>
-label-connected = " %{A1:i3-sensible-terminal -e 'sh -c nmtui':}%{F#e39e54} %{F#e8d174}%essid%%{A}  "
+label-connected = " %{A1:termite -e 'sh -c nmtui':} %{F#e8e8e8}%essid%%{A}  "
+label-connected-foreground = ${colours.icons}
 label-disconnected = " %{F#33} "
 label-font = 0
+
 
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
-format = " <ramp> <label> "
-label-foreground = ${colours.text}
+format = <ramp> <label>
+
+label-foreground = ${colours.white}
+
 ramp-0 = 🌕
-ramp-0-foreground = ${colours.maia}
 ramp-1 = 🌔
-ramp-1-foreground = ${colours.maia}
 ramp-2 = 🌓
-ramp-2-foreground = ${colours.icon}
-ramp-3 = 
-ramp-3-foreground = ${colours.text}
-ramp-4 = 
-ramp-4-foreground = ${colours.text}
+ramp-3 = 🌒
+ramp-4 = 🌑
+ramp-foreground = ${colours.icons}
+
+bar-width = 6
+bar-indicator = 
+bar-fill = 
+bar-fill-font = 3
+bar-fill-foreground = ${colours.white}
+bar-empty = 
+bar-empty-font = 3
+bar-empty-foreground = ${colours.grey}
+
 
 [module/xwindow]
 type = internal/xwindow
+
 label = %title%
-label-foreground = ${colours.text}
+label-foreground = ${colours.white}
+
 
 [module/powermenubarlauncher]
 type = custom/text
-content = "%{F#e39e54} "
+content = "  "
+content-foreground = #cc0000
 click-left = polybar powermenubar
+
 
 [bar/powermenubar]
 ;monitor = eDP-1
 width = 28%
 height = 32
 radius = 0
-background = #419873
-foreground = ${colours.fg}
+
+background = #DA222222
+foreground = ${colours.white}
+
 border-size = 0
+border-color =${colours.clear}
+
 border-bottom-size = 0
+border-bottom-color = ${colours.clear}
+
 border-top-size = 0
+border-top-color = ${colours.clear}
+
 border-right-size = 0
+; border-right-color = ${colours.clear}
+
 offset-x = 1370
 offset-y = 35
+
 padding = 3
 module-margin = 2 
 separator = %{F#33}|
-font-0 = System San Francisco Display:size=10;2
-font-1 = FontAwesome:size=14;3
-font-2 = MaterialIcons:size=14;4
-font-3 = URW Gothic:size=11;2
-font-4 = Raleway VF Beta:size=11:weight=Regular;1
-;http://fontawesome.io/cheatsheet/
-;https://shanfan.github.io/material-icons-cheatsheet/
+
 modules-center = lock logout suspend reboot poweroff closepowermenubar
+
 override-redirect = true
 wm-restack = true
 
-[module/lock]
-type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Lock"
-click-left = "pkill -n polybar ; sh ~/.config/i3/Lock.sh"
-[module/suspend]
-type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Suspend"
-click-left = "pkill -n polybar ; sh ~/.config/i3/Lock.sh && systemctl suspend"
+
+;[module/lock]
+;type = custom/text
+;content = "%{F#259E83} %{F-}Lock"
+;click-left = "pkill -n polybar ; sh ~/.config/i3/Lock.sh"
+
+
+;[module/suspend]
+;type = custom/text
+;content = "%{F#259E83} %{F-}Suspend"
+;click-left = "pkill -n polybar ; sh ~/.config/i3/Lock.sh && systemctl suspend"
+
+
 [module/logout]
 type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Logout"
+content = "%{F#259E83} %{F-}Logout"
 click-left = "pkill -n polybar ; i3-msg exit"
+
+
 [module/reboot]
 type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Reboot"
+content = "%{F#259E83} %{F-}Reboot"
 click-left = "pkill -n polybar ; systemctl reboot"
+
+
 [module/poweroff]
 type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Poweroff"
+content = "%{F#259E83} %{F-}Poweroff"
 click-left = "pkill -n polybar ; systemctl poweroff"
+
+
 [module/closepowermenubar]
 type = custom/text
-content = "%{F#e39e54} %{F#e8d174}Cancel"
+content = "%{F#259E83} %{F-}Cancel"
 click-left = "pkill -n polybar"
+
 
 [settings]
 throttle-output = 10

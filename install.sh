@@ -14,6 +14,12 @@
 #    - neovim: Python 3, Node.js
 #
 # Inspired by https://github.com/iamrecursion/dotfiles
+#
+# Fonts to install:
+#     - xorg-xfd, fontawesome, bdf-unifont
+#     - https://aur.archlinux.org/siji-git.git
+#
+#
 ############################
 
 # Current linux window manager (e.g. Gnome, i3)
