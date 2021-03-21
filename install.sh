@@ -160,6 +160,8 @@ STATUS
 
 
 link_zsh () {
+    confirm "Setup zsh?" || return 0
+    
     echo "${status_prefix} Linking ZSH Configuration"
 
     ln -sf ${DIR}/zsh/zshrc ${HOME}/.zshrc
@@ -169,6 +171,8 @@ link_zsh () {
 
 
 link_termite () {
+    confirm "Setup Termite?" || return 0
+    
     echo "${status_prefix} Linking Termite Configuration"
 
     ln -sf ${DIR}/termite/config ${HOME}/.config/termite/config
@@ -176,8 +180,20 @@ link_termite () {
     return 0
 }
 
+link_kitty () {
+    confirm "Setup Kitty?" || return 0
+    
+    echo "${status_prefix} Linking Kitty Configuration"
+
+    ln -sf ${DIR}/kitty/kitty.conf ${HOME}/.config/kitty/kitty.conf
+    ln -sf ${DIR}/kitty/challenger-deep.conf ${HOME}/.config/kitty/challenger-deep.conf
+ 
+    return 0
+}
 
 link_neovim () {
+    confirm "Setup Neovim?" || return 0
+    
     # initialise settings
     echo "${status_prefix} Linking Neovim Configuration"
     nvimrc_dir="${HOME}/.config/nvim"
@@ -210,6 +226,10 @@ link_neovim () {
 
 
 link_ergodox () {
+    # Keyboard configuration
+
+    confirm "Setup ErgoDox-EZ?" || return 0
+    
     echo "${status_prefix} Linking ErgoDox-EZ configuration"
     # Based on the following instructions:
     #   - https://github.com/zsa/wally/wiki/Linux-install
@@ -227,6 +247,10 @@ link_ergodox () {
 }
 
 link_pop_shell () {
+    # Window manager for GNOME
+
+    confirm "Setup Pop_shell?" || return 0
+    
     echo "${status_prefix} Setting up Pop_shell"
     // https://github.com/pop-os/shell
 
@@ -237,6 +261,9 @@ link_pop_shell () {
 
 
 link_i3 () {
+    # Window manager
+    confirm "Setup i3?" || return 0
+
     echo "${status_prefix} Linking i3 configuration"
     # Based on the following instructions:
     #   - https://github.com/Airblader/i3/wiki/installation
@@ -268,6 +295,10 @@ link_i3 () {
 }
 
 link_tmux () {
+    # Terminal session manager
+
+    confirm "Setup Tmux?" || return 0
+    
     echo "${status_prefix} Linking Tmux configuration"
 
     ln -sf "${DIR}/tmux/tmux.conf" "${HOME}/.tmux.conf"
@@ -318,16 +349,16 @@ create_gitconfig () {
 
 
 install () {
-    #link_i3 || exit 1
-    #link_zsh || exit 1
+    link_i3 || exit 1
+    link_zsh || exit 1
     link_neovim || exit 1
-    #link_termite || exit 1
-    #link_ergodox || exit 1
-    #link_tmux || exit 1
-    #link_gdb || exit 1
-    #if [[ ${wm} == "${wm_i3}" ]]; then
-    #	    link_polybar || exit 1
-    #fi
+    link_termite || exit 1
+    link_ergodox || exit 1
+    link_tmux || exit 1
+    link_gdb || exit 1
+    if [[ ${wm} == "${wm_i3}" ]]; then
+    	    link_polybar || exit 1
+    fi
 
     create_gitconfig || exit 1
 }
@@ -379,9 +410,9 @@ main () {
     install_system_package "${system_deps}" || exit 1
 
     # Installs
-    #preinstall
+    preinstall
     install
-    #postinstall  # Copy and Edit Gitconfig
+    postinstall  # Copy and Edit Gitconfig
 }
 
 # -----------------------------------------------------------------------------
