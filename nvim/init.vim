@@ -115,38 +115,6 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " Lightline
 let g:lightline = {
       \ 'colorscheme': 'challenger_deep',
-      \ 'active': {
-      \   'left':  [ [ 'mode', 'paste' ],
-      \              [ 'readonly', 'relativepath', 'percent', 'modified' ],
-      \            ],
-      \   'right': [ [ ],
-      \              [ 'filetype' ]],
-      \   },
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
-      \ },
-      \ 'tab': {
-      \   'active': [ 'filename', 'modified' ],
-      \   'inactive': [ 'filename', 'modified' ],
-      \ },
-      \ 'tabline': {
-      \   'left': [ [ 'tabs' ] ],
-      \   'right': [ [ 'gitbranch' ] ],
-      \ },
-      \ 'component_expand': {
-      \   'buffercurrent': 'lightline#buffer#buffercurrent',
-      \   'bufferbefore': 'lightline#buffer#bufferbefore',
-      \   'bufferafter': 'lightline#buffer#bufferafter',
-      \ },
-      \ 'component_type': {
-      \   'buffercurrent': 'tabsel',
-      \   'bufferbefore': 'raw',
-      \   'bufferafter': 'raw',
-      \ },
-      \ 'component': {
-      \   'separator': '',
-      \ },
       \ }
 
 " .rasi syntax
