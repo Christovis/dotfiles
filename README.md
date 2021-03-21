@@ -8,7 +8,7 @@ applications that I use day-to-day.
 It currently supports:
 - **OS**: Manjaro
 - **DE**: Gnome (+ Pop_Shell), i3 (+ extentions)
-- **Terminal**: Konsole, Termite
+- **Terminal**: Konsole, Termite, Kitty
 
 and configures
 - `git`: A sensible gitconfig where user name, email and GPG key can be set at
@@ -19,6 +19,7 @@ and configures
   for seamless interoperation with Neovim. [-]
 - `zsh`: A configurations including a custom theme with a _useful_ prompt clock. [-]
 - `termite`:  highly customizable terminal emulator
+- `kitty`:  highly customizable and GPU accelerated terminal emulator
 - `polybar`:  highly customizable status bars for their desktop environmen. [i3]
 - `ergodox-ez`:  highly customizable keyboard
 
