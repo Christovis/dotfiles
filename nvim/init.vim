@@ -37,6 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Autocomplete
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'SirVer/ultisnips'
 
   " Devicon glyphs for Nerdtree
   Plug 'ryanoasis/vim-devicons'
@@ -46,6 +47,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Testing
   Plug 'vim-test/vim-test'
+
+  " Writing
+  Plug 'vimwiki/vimwiki'
+  Plug 'lervag/vimtex'
 
   call plug#end()
 
@@ -111,6 +116,8 @@ nnoremap <silent> <Leader>pv :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+" UltiSnips
+let g:UltiSnipsSnippetDirectories=['/home/christovis/.ultisnips/']
 
 " Lightline
 let g:lightline = {
