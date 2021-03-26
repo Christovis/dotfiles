@@ -32,9 +32,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " repl
   Plug 'Vigemus/iron.nvim'
 
-  " Better Visual Guide
-  Plug 'Yggdroot/indentLine'
-
   " Autocomplete
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'SirVer/ultisnips'
@@ -58,10 +55,7 @@ set encoding=UTF-8
 
 filetype plugin indent on
 
-"####################################################################
-"##################### General vim settings #########################
-"####################################################################
-
+" BASIC EDITOR CONFIGURATION ==================================================
 " Orientation
 set cursorline
 set ruler
@@ -172,10 +166,30 @@ if has("termguicolors")
     set termguicolors
 endif
 
+" VimTex settings ============================================================
+set conceallevel=1
+set concealcursor=nc
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+let g:tex_conceal = ''
+"highlight clear Conceal
+let g:vimtex_fold_manual = 1
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_compiler_progname = 'nvr'
+" table of content settings
+let g:vimtex_toc_config = {
+      \ 'name' : 'TOC',
+      \ 'layers' : ['content', 'todo', 'include'],
+      \ 'resize' : 1,
+      \ 'split_width' : 50,
+      \ 'todo_sorted' : 0,
+      \ 'show_help' : 1,
+      \ 'show_numbers' : 1,
+      \ 'mode' : 2,
+      \}
 
-"####################################################################
-"######################### Python settings ##########################
-"####################################################################
+" Python settings ============================================================
 " Black
 nmap <leader>b :Black<CR>
 " test mappings
@@ -186,9 +200,7 @@ nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 let test#strategy = "vimux"
 
-"####################################################################
-"########################### coc settings ###########################
-"####################################################################
+" coc settings ===============================================================
 " TextEdit might fail if hidden is not set.
 
 "disable in julia
