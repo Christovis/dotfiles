@@ -243,6 +243,7 @@ link_ergodox () {
     #   - https://github.com/zsa/wally/wiki/Live-training-on-Linux
 
     ln -sf "${DIR}/ergodox/50-oryx.rules" "/etc/udev/rules.d/50-oryx.rules"
+    ln -sf "${DIR}/ergodox/50-wally.rules" "/etc/udev/rules.d/50-wally.rules"
 
     # Make sure your user is part of the plugdev group
     # (as it is not the default on some distros):
