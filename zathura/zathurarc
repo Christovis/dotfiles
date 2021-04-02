@@ -4,6 +4,9 @@
 # Enable copy to clipboard
 set selection-clipboard clipboard
 
+# Browser hook for weblinks
+set sandbox none
+
 # Open document in fit-width mode by default
 set adjust-open "best-fit"
 
@@ -19,45 +22,54 @@ set scroll-step 100
 set zoom-min 10
 set guioptions ""
 
-# zathurarc-dark
-
 set font "inconsolata 15"
-set default-bg "#000000" #00
-set default-fg "#F7F7F6" #01
 
-set statusbar-fg "#B0B0B0" #04
-set statusbar-bg "#202020" #01
-
-set inputbar-bg "#151515" #00 currently not used
-set inputbar-fg "#FFFFFF" #02
-
-set notification-error-bg "#AC4142" #08
-set notification-error-fg "#151515" #00
-
-set notification-warning-bg "#AC4142" #08
-set notification-warning-fg "#151515" #00
-
-set highlight-color "#F4BF75" #0A
-set highlight-active-color "#6A9FB5" #0D
-
-set completion-highlight-fg "#151515" #02
-set completion-highlight-bg "#90A959" #0C
-
-set completion-bg "#303030" #02
-set completion-fg "#E0E0E0" #0C
-
-set notification-bg "#90A959" #0B
-set notification-fg "#151515" #00
-
-set recolor "true"
-set recolor-lightcolor "#000000" #00
-set recolor-darkcolor "#E0E0E0" #06
-set recolor-reverse-video "true"
-set recolor-keephue "true"
-
-
-set render-loading "false"
 set scroll-step 50
 unmap f
 map f toggle_fullscreen
 map [fullscreen] f toggle_fullscreen
+
+# color theme ----------------------------------------------------------------
+# solarized-light
+set notification-error-bg       "#eee8d5" # base2  # seem not work
+set notification-error-fg       "#dc322f" # red
+set notification-warning-bg     "#eee8d5" # base2
+set notification-warning-fg     "#dc322f" # red
+set notification-bg             "#eee8d5" # base2
+set notification-fg             "#268bd2" # blue
+
+set completion-bg               "#fdf6e3" # base3
+set completion-fg               "#657b83" # base00
+set completion-group-bg         "#eee8d5" # base2
+set completion-group-fg         "#586e75" # base01
+set completion-highlight-bg     "#93a1a1" # base1
+set completion-highlight-fg     "#073642" # base02
+
+# Define the color in index mode
+set index-bg                   "#fdf6e3" # base3
+set index-fg                   "#657b83" # base00
+set index-active-bg             "#eee8d5" # base2
+set index-active-fg             "#586e75" # base01
+
+set inputbar-bg                 "#93a1a1" # base1
+set inputbar-fg                 "#073642" # base02
+
+set statusbar-bg                "#fdf6e3" # base3
+set statusbar-fg                "#657b83" # base00
+
+set highlight-color             "#839496" # base0  # hightlight match when search keyword(vim's /)
+set highlight-active-color      "#cb4616" # orange
+
+set default-bg                  "#fdf6e3" # base3
+set default-fg                  "#657b83" # base00
+set render-loading              true
+# set render-loading-fg           "#fdf6e3" # base3
+# set render-loading-bg           "#fdf6e3" # base3
+
+# Recolor book content's color
+# verbose
+# verbose
+set recolor-lightcolor          "#fdf6e3" # base3
+set recolor-darkcolor           "#657b83" # base00
+set recolor                     "true"
+# set recolor-keephue             true      # keep original color

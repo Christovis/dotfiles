@@ -1,4 +1,36 @@
-# zathurarc-dark
+# Zathura configuration file
+# See man `man zathurarc'
+
+# Enable copy to clipboard
+set selection-clipboard clipboard
+
+# Browser hook for weblinks
+set sandbox none
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+#zoom settings
+set zoom-min 10
+set guioptions ""
+
+set font "inconsolata 15"
+
+set scroll-step 50
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+# color theme ----------------------------------------------------------------
+# solarized-dark
 set notification-error-bg       "#586e75" # base01  # seem not work
 set notification-error-fg       "#dc322f" # red
 set notification-warning-bg     "#586e75" # base01
