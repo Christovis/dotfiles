@@ -22,6 +22,10 @@ detect_platform () {
 }
 detect_platform
 
+
+# Browser ====================================================================:
+BROWSER=/usr/bin/brave
+
 # Locale =====================================================================:
 
 if [[ "${platform}" == "${platform_linux}" ]]; then
@@ -90,6 +94,9 @@ zmodload zsh/terminfo
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# ZSH Autosuggestions Configuration
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=64'
+
 # Timezone (Only Set on Linux)
 if [[ "${platform}" == "${platform_linux}" ]]; then
     export TZ="Europe/London"
@@ -102,6 +109,12 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Aliases ==================================================================:
+
+# Latex Package Manager
+alias tlmgr='/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode'
+
+# Audio Setting
+alias unmute='alsactl restore'
 
 # Neovim Configuration
 alias nvimrc="nvim ~/.config/nvim/init.vim"
@@ -128,7 +141,7 @@ fi
 alias ll="ls -lh"
 alias lll="ls -lah"
 alias cdh="cd ~/"
-alias cdu="cd .."
+alias cdu="cd ./.."
 
 # DIRAC/COSMA Interactions
 alias cosma5='ssh -Y dc-beck3@login5.cosma.dur.ac.uk'
@@ -143,8 +156,6 @@ alias gpu='ssh -Y zcxn55@129.234.62.89'
 alias printer='ssh -Y vtfp28@stargate.dur.ac.uk'
 
 # Monitor Settings
-alias dualmonitor='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
-alias dualmonitor2='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
 alias dualup='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --above eDP1'
 alias dualleft='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --left-of eDP1'
 alias dualright='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --right-of eDP1'
