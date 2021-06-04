@@ -26,7 +26,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'nerdypepper/vim-colors-plain', { 'branch': 'duotone' }
   Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 
-  "tmux
+  " tmux
   Plug 'christoomey/vim-tmux-navigator'
 
   " repl
@@ -49,7 +49,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vimwiki/vimwiki'
   Plug 'lervag/vimtex'
 
-  call plug#end()
+  " Julia support
+  Plug 'JuliaEditorSupport/julia-vim', {'for' : 'julia'}
+  Plug 'kdheepak/JuliaFormatter.vim'
+
+call plug#end()
 
 set encoding=UTF-8
 
