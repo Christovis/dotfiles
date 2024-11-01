@@ -18,6 +18,9 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 require("lazy").setup("plugins")
 
+-- Set color scheme
+vim.cmd('colorscheme monokai-pro')
+
 -- global clipboard
 vim.opt.clipboard = "unnamedplus"
 
@@ -41,9 +44,12 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.autoindent = true
 
--- Set color scheme
-vim.cmd('colorscheme monokai-pro')
-
+-- Telescope | Fuzzy finder over lists
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 -- Quarto | An open-source scientific and technical publishing system
 require('quarto').setup{

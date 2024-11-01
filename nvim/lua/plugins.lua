@@ -5,9 +5,8 @@ return {
 	{"averms/black-nvim"},
 	{"jpalardy/vim-slime"},
 	{"vim-test/vim-test"},
-    {"github/copilot.vim"},
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
 	{
@@ -25,7 +24,6 @@ return {
     },
     {"rebelot/heirline.nvim"},
     {"tpope/vim-surround"},
-    {"lervag/vimtex"},
     {'jmbuhr/otter.nvim'},
     {'quarto-dev/quarto-nvim'},
     {"JuliaEditorSupport/julia-vim"},
