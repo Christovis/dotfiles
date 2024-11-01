@@ -49,6 +49,3 @@ their final locations.
 
 NB: This will overwrite any existing configuration that exists at the target
 paths, so if you want to try these out please back up your configuration.
-
-## Credits
-Thanks to [Ara Adkins](https://github.com/iamrecursion) for the inspiration and [Joel Glovier](https://github.com/jglovier) for the [Dofiles Logo](https://github.com/jglovier/dotfiles-log\o).
