@@ -24,7 +24,7 @@ detect_platform
 
 
 # Browser ====================================================================:
-BROWSER=/usr/bin/brave
+#BROWSER=/usr/bin/brave
 
 # Locale =====================================================================:
 
@@ -37,41 +37,12 @@ fi
 
 # ZPlug ======================================================================:
 
-source ~/.dotfiles/submodules/zplug/init.zsh
-
-# Load Plugins (Handling some potential Crashes)
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search", \
-    use:"./zsh-history-substring-search.zsh", \
-    on:"zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/compleat", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "Tarrasch/zsh-functional", from:github, use:"./functional.plugin.zsh"
-zplug "Tarrasch/zsh-autoenv", from:github, use:"./init.sh"
-zplug "b4b4r07/enhancd", from:github, use:"./init.sh"
-zplug "mafredri/zsh-async", from:github, use:"./async.zsh"
-
-# Load Theme
-zplug "~/.dotfiles/themes/", from:local, use:"recursion_pure.zsh-theme"
-
-# Install Plugins
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load
-
-
 # Additional Configuration ===================================================:
+ZSH_THEME="robbyrussell"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/usr/share/oh-my-zsh/
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
 
 # History Configuration
 HISTFILE=~/.zsh_history
@@ -151,9 +122,18 @@ alias cosma7b='ssh -L 8443:login7b.cosma.dur.ac.uk:443 dc-beck3@login7b.cosma.du
 alias cosmaa='ssh -Y dc-beck3@login5a.cosma.dur.ac.uk'
 alias cosmab='ssh -Y dc-beck3@login5b.cosma.dur.ac.uk'
 alias cosmajupyter="ssh -XY dc-beck3@cosma-a.cosma.dur.ac.uk 'jupyter-notebook --no-browser'"
-alias tunnel='ssh -L localhost:8891:127.0.0.1:8889 -N dc-beck3@login5b.cosma.dur.ac.uk'
+alias tunnel='ssh -L localhost:8891:127.0.0.1:88ango_model89 -N dc-beck3@login5b.cosma.dur.ac.uk'
 alias gpu='ssh -Y zcxn55@129.234.62.89'
 alias printer='ssh -Y vtfp28@stargate.dur.ac.uk'
+
+# Linux software manager
+export PATH="/var/lib/snapd/snap/bin:$PATH"
+
+# Python projects
+export PATH="/home/christovis/.pixi/bin:$PATH"
+
+export PYTHONPATH="$PYTHONPATH:/home/christovis/mango_model/"
+export PYTHONPATH="$PYTHONPATH:/home/christovis/mango_db/"
 
 # Monitor Settings
 alias dualup='xrandr --auto --output HDMI2 --mode 1920x1080 --rate 75 --above eDP1'
